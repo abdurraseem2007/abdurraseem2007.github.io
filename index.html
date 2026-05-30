@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdur Raseem Ayyoubi | Cybersecurity Engineer</title>
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-dark: #0a0a0c;
+            --bg-card: #121216;
+            --accent-neon: #00ff66; /* Cyber Green */
+            --accent-blue: #00e5ff; /* Terminal Blue */
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --border-color: #222226;
+            --glow: rgba(0, 255, 102, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Custom Selection color */
+        ::selection {
+            background: var(--accent-neon);
+            color: var(--bg-dark);
+        }
+
+        /* Matrix Particle Canvas background effect */
+        #matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        /* Header / Navbar */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 12, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--text-main);
+            text-decoration: none;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: var(--accent-neon);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-family: 'JetBrains Mono', monospace;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-neon);
+        }
+
+        /* Main layout framework */
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem 2rem;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0, 255, 102, 0.05);
+            border: 1px solid rgba(0, 255, 102, 0.2);
+            color: var(--accent-neon);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+            align-self: flex-start;
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.05);
+        }
+
+        .hero-badge i {
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title span {
+            background: linear-gradient(to right, var(--text-main), var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .glitch-text {
+            color: var(--accent-blue);
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-desc {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            color: var(--text-muted);
+            max-width: 700px;
+            margin-bottom: 3rem;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--accent-neon);
+            color: var(--bg-dark);
+            font-weight: 700;
+            border: 1px solid var(--accent-neon);
+            box-shadow: 0 4px 20px var(--glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0, 255, 102, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        /* Section Headings */
+        .section-header {
+            margin-bottom: 3.5rem;
+        }
+
+        .section-num {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-neon);
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        /* About / Objective Card split */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 3rem;
+        }
+
+        @media (max-width: 900px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .about-text p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .target-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 2.5rem;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .target-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-blue);
+        }
+
+        .target-box h3 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--accent-blue);
+        }
+
+        /* Skills Layout */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            border-color: rgba(0, 255, 102, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .skill-card h3 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .skill-card h3 i {
+            color: var(--accent-neon);
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            transition: all 0.2s;
+        }
+
+        .skill-card:hover .tag {
+            border-color: rgba(255, 255, 255, 0.15);
+            color: var(--text-main);
+        }
+
+        /* Certifications display */
+        .cert-card {
+            background: linear-gradient(135deg, var(--bg-card) 0%, #16161c 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 3rem;
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            .cert-card {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 2rem;
+                gap: 1.5rem;
+            }
+        }
+
+        .cert-badge-icon {
+            font-size: 3.5rem;
+            color: var(--accent-neon);
+            background: rgba(0, 255, 102, 0.05);
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px dashed rgba(0, 255, 102, 0.3);
+            flex-shrink: 0;
+        }
+
+        .cert-info h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-issuer {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-blue);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .cert-topics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .cert-topics .topic-tag {
+            background: rgba(0, 229, 255, 0.05);
+            border: 1px solid rgba(0, 229, 255, 0.15);
+            color: var(--accent-blue);
+            padding: 0.3rem 0.7rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Contact & Footer Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 5rem;
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+        }
+
+        .contact-left h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            margin-bottom: 1rem;
+        }
+
+        .contact-left p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            text-decoration: none;
+            color: var(--text-muted);
+            padding: 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--text-main);
+            transition: color 0.3s;
+        }
+
+        .contact-item-info span {
+            display: block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 0.2rem;
+        }
+
+        .contact-item-info p {
+            font-size: 1rem;
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .contact-item:hover {
+            border-color: var(--accent-neon);
+            transform: translateX(5px);
+        }
+
+        .contact-item:hover i {
+            color: var(--accent-neon);
+        }
+
+        footer {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        @media (max-width: 600px) {
+            footer {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cyber Space Particle Background Effect -->
+    <canvas id="matrix-bg"></canvas>
+
+    <!-- Top Navigation Bar -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">AYYOUBI<span>.</span>SEC</a>
+            <ul class="nav-links">
+                <li><a href="#about">01. About</a></li>
+                <li><a href="#skills">02. Skills</a></li>
+                <li><a href="#certifications">03. Certs</a></li>
+                <li><a href="#contact">04. Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Showcase Section -->
+    <section class="hero-section" id="home">
+        <div class="hero-badge">
+            <i class="fa-solid fa-shield-halved"></i> Available for Cyber Security Internships
+        </div>
+        <h1 class="hero-title">
+            <span>I'm Abdur Raseem Ayyoubi.</span><br>
+            <span class="glitch-text">Cybersecurity Engineer</span>
+        </h1>
+        <p class="hero-desc">
+            Motivated Cybersecurity and IoT student focusing on Network Security, Cloud Integrity, and Security Operations. Specialized in keeping ahead of digital threats and architectural vulnerabilities.
+        </p>
+        <div class="cta-group">
+            <a href="#contact" class="btn btn-primary">Initialize Contact</a>
+            <a href="#skills" class="btn btn-secondary">Explore Capabilities</a>
+        </div>
+    </section>
+
+    <!-- About Me & Objectives Section -->
+    <section id="about">
+        <div class="section-header">
+            <span class="section-num">01 // IDENTITY</span>
+            <h2 class="section-title">About Me</h2>
+        </div>
+        <div class="about-grid">
+            <div class="about-text">
+                <p>
+                    I study Cyber Security and IoT with an intense commitment to discovering how systems break, and building modern, airtight defenses to keep them functioning securely. Technical roadblocks don't deter me; they fuel my drive to engineer smarter solutions.
+                </p>
+                <p>
+                    I actively follow emerging technologies, parsing system configurations, and exploring real-world applications of robust cryptographic and network frameworks.
+                </p>
+            </div>
+            <div class="target-box">
+                <h3><i class="fa-solid fa-location-crosshairs"></i> Deployment Objective</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem;">
+                    Seeking targeted entry-level positions and internship opportunities within the UAE (Dubai / Abu Dhabi). Eager to inject drive, modern threat knowledge, and operational vigilance into regional critical architectures.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Skills Matrices Layout -->
+    <section id="skills">
+        <div class="section-header">
+            <span class="section-num">02 // ARSENAL</span>
+            <h2 class="section-title">Technical Competencies</h2>
+        </div>
+        <div class="skills-grid">
+            
+            <!-- Skill Card 1: Cyber Security -->
+            <div class="skill-card">
+                <h3><i class="fa-solid fa-user-shield"></i> Cyber Security</h3>
+                <div class="skill-tags">
+                    <span class="tag">Network Security</span>
+                    <span class="tag">Security Fundamentals</span>
+                    <span class="tag">Risk Management</span>
+                    <span class="tag">Vulnerability Assessment</span>
+                    <span class="tag">Incident Response Basics</span>
+                    <span class="tag">Security Monitoring</span>
+                </div>
+            </div>
+
+            <!-- Skill Card 2: Networking -->
+            <div class="skill-card">
+                <h3><i class="fa-solid fa-network-wired"></i> Networking</h3>
+                <div class="skill-tags">
+                    <span class="tag">TCP/IP Protocol Stack</span>
+                    <span class="tag">DNS & DHCP Configuration</span>
+                    <span class="tag">Routing & Switching</span>
+                    <span class="tag">Network Troubleshooting</span>
+                </div>
+            </div>
+
+            <!-- Skill Card 3: Cloud Frameworks -->
+            <div class="skill-card">
+                <h3><i class="fa-solid fa-cloud-lock"></i> Cloud Infrastructure</h3>
+                <div class="skill-tags">
+                    <span class="tag">Cloud Computing Fundamentals</span>
+                    <span class="tag">Cloud Security Concepts</span>
+                    <span class="tag">Identity & Access Management (IAM)</span>
+                </div>
+            </div>
+
+            <!-- Skill Card 4: Programming & Tools -->
+            <div class="skill-card">
+                <h3><i class="fa-solid fa-code"></i> Engineering Tools</h3>
+                <div class="skill-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Java</span>
+                    <span class="tag">C Programming</span>
+                    <span class="tag">SQL</span>
+                    <span class="tag">Wireshark</span>
+                    <span class="tag">Linux Environments</span>
+                    <span class="tag">Git & GitHub</span>
+                    <span class="tag">VS Code</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Certifications Highlight -->
+    <section id="certifications">
+        <div class="section-header">
+            <span class="section-num">03 // CREDENTIALS</span>
+            <h2 class="section-title">Verified Certifications</h2>
+        </div>
+        <div class="cert-card">
+            <div class="cert-badge-icon">
+                <i class="fa-solid fa-award"></i>
+            </div>
+            <div class="cert-info">
+                <h3>Google Cybersecurity Professional Certificate</h3>
+                <span class="cert-issuer">Issued by Google</span>
+                <p style="color: var(--text-muted); margin-bottom: 1.2rem; font-size: 0.95rem;">
+                    Completed rigorous immersion into complex defense topics, proving practical knowledge of standard security pipelines, modern investigative analysis, and programming foundations.
+                </p>
+                <div class="cert-topics">
+                    <span class="topic-tag">Security Foundations</span>
+                    <span class="topic-tag">Linux Systems</span>
+                    <span class="topic-tag">SQL Databases</span>
+                    <span class="topic-tag">Python Scripting</span>
+                    <span class="topic-tag">Network Security</span>
+                    <span class="topic-tag">Incident Response</span>
+                    <span class="topic-tag">SIEM Tools</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Communication Hub & Footing -->
+    <section id="contact" style="padding-bottom: 6rem;">
+        <div class="contact-grid">
+            <div class="contact-left">
+                <h2>Get In Touch</h2>
+                <p>I am actively hunting for my next cybersecurity challenge, ecosystem internship, or junior collaborative role. Open to remote chats and regional placements across Dubai and Abu Dhabi.</p>
+            </div>
+            <div class="contact-links">
+                
+                <!-- Email -->
+                <a href="mailto:raseemayyoubi@gmail.com" class="contact-item">
+                    <i class="fa-regular fa-envelope"></i>
+                    <div class="contact-item-info">
+                        <span>SECURE LINK VIA EMAIL</span>
+                        <p>raseemayyoubi@gmail.com</p>
+                    </div>
+                </a>
+
+                <!-- LinkedIn -->
+                <a href="https://www.linkedin.com/in/abdur-raseem-ayyoubi-a-667358331" target="_blank" class="contact-item">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                    <div class="contact-item-info">
+                        <span>PROFESSIONAL MATRIX</span>
+                        <p>Abdur Raseem Ayyoubi</p>
+                    </div>
+                </a>
+
+                <!-- GitHub -->
+                <a href="https://github.com/abdurraseem2007" target="_blank" class="contact-item">
+                    <i class="fa-brands fa-github"></i>
+                    <div class="contact-item-info">
+                        <span>SOURCE DIRECTORY</span>
+                        <p>abdurraseem2007</p>
+                    </div>
+                </a>
+
+                <!-- LeetCode -->
+                <a href="https://leetcode.com/u/ayyoubi_007/" target="_blank" class="contact-item">
+                    <i class="fa-solid fa-code-branch"></i>
+                    <div class="contact-item-info">
+                        <span>ALGORITHMIC RUNTIME</span>
+                        <p>ayyoubi_007</p>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div>Designed & Built by Abdur Raseem Ayyoubi</div>
+        <div>&copy; 2026 // Secure Infrastructure Portfolio</div>
+    </footer>
+
+    <!-- JavaScript for background ambient lines & nodes -->
+    <script>
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        // Creating dynamic digital node background
+        const numNodes = 45;
+        const nodes = [];
+
+        for (let i = 0; i < numNodes; i++) {
+            nodes.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                vx: (Math.random() - 0.5) * 0.4,
+                vy: (Math.random() - 0.5) * 0.4,
+                radius: Math.random() * 2 + 1
+            });
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            ctx.fillStyle = 'rgba(0, 255, 102, 0.4)';
+            ctx.strokeStyle = 'rgba(0, 229, 255, 0.04)';
+
+            // Move and update positions
+            nodes.forEach(node => {
+                node.x += node.vx;
+                node.y += node.vy;
+
+                if (node.x < 0 || node.x > width) node.vx *= -1;
+                if (node.y < 0 || node.y > height) node.vy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            // Connect neighboring nodes with delicate lines
+            for (let i = 0; i < numNodes; i++) {
+                for (let j = i + 1; j < numNodes; j++) {
+                    const dx = nodes[i].x - nodes[j].x;
+                    const dy = nodes[i].y - nodes[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 160) {
+                        ctx.beginPath();
+                        ctx.moveTo(nodes[i].x, nodes[i].y);
+                        ctx.lineTo(nodes[j].x, nodes[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+</html>
